@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | Miss Hadeer Biology Academy</title>
+    <style>
+        /* --- 1. Global Variables (Consistent with previous pages) --- */
+        :root {
+            --primary-color: #2E7D32;
+            --primary-light: #43A047;
+            --accent-color: #6A1B9A;
+            --bg-color: #F1F8F1;
+            --card-bg: #FFFFFF;
+            --text-dark: #2C3E50;
+            --text-light: #546E7A;
+            --white: #FFFFFF;
+            --radius-md: 12px;
+            --radius-lg: 20px;
+            --shadow-sm: 0 2px 8px rgba(0,0,0,0.05);
+            --shadow-hover: 0 8px 16px rgba(46, 125, 50, 0.1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-dark);
+        }
+
+        a { text-decoration: none; color: inherit; }
+
+        /* --- 2. Header --- */
+        header {
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+            padding: 1rem 5%;
+            color: var(--white);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .logo { font-weight: 700; font-size: 1.2rem; display: flex; align-items: center; gap: 8px; }
+        .logo span { background: rgba(255,255,255,0.2); padding: 4px 8px; border-radius: 8px; }
+
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(255,255,255,0.15);
+            padding: 5px 15px;
+            border-radius: 50px;
+        }
+
+        .user-avatar { font-size: 1.2rem; }
+
+        /* --- 3. Dashboard Layout --- */
+        .dashboard-container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: 250px 1fr; /* Sidebar | Content */
+            gap: 2rem;
+        }
+
+        /* Sidebar Navigation */
+        .sidebar {
+            background: var(--card-bg);
+            border-radius: var(--radius-md);
+            padding: 1.5rem;
+            box-shadow: var(--shadow-sm);
+            height: fit-content;
+        }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px;
+            margin-bottom: 0.5rem;
+            border-radius: var(--radius-md);
+            color: var(--text-light);
+            font-weight: 500;
+            transition: 0.3s;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            background-color: #E8F5E9;
+            color: var(--primary-color);
+            transform: translateX(5px);
+        }
+
+        .nav-link.logout { color: #d32f2f; margin-top: 1rem; border-top: 1px solid #eee; }
+        .nav-link.logout:hover { background-color: #ffebee; }
+
+        /* Main Content */
+        .welcome-banner {
+            background: linear-gradient(to right, #6A1B9A, #8E24AA);
+            color: white;
+            padding: 2rem;
+            border-radius: var(--radius-lg);
+            margin-bottom: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .welcome-banner h1 { margin-bottom: 0.5rem; }
+        .welcome-banner::after {
+            content: "🧬";
+            position: absolute;
+            right: -20px;
+            bottom: -30px;
+            font-size: 10rem;
+            opacity: 0.15;
+            transform: rotate(-20deg);
+        }
+
+        /* Stats Cards */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-sm);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            border-bottom: 4px solid transparent;
+        }
+
+        .stat-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-hover); }
+        .stat-card.green { border-color: var(--primary-color); }
+        .stat-card.purple { border-color: var(--accent-color); }
+        .stat-card.blue { border-color: #1976D2; }
+
+        .stat-icon {
+            font-size: 2rem;
+            padding: 10px;
+            border-radius: 50%;
+            background: #F5F5F5;
+        }
+
+        .stat-info h3 { font-size: 1.8rem; color: var(--text-dark); }
+        .stat-info p { font-size: 0.85rem; color: var(--text-light); }
+
+        /* Current Course Progress */
+        .section-header { margin-bottom: 1rem; color: var(--primary-color); font-weight: 700; }
+
+        .course-card {
+            background: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-sm);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .course-info h4 { font-size: 1.1rem; margin-bottom: 5px; }
+        .course-info span { font-size: 0.9rem; color: var(--text-light); }
+
+        .progress-wrapper {
+            flex: 1;
+            min-width: 200px;
+            max-width: 400px;
+        }
+
+        .progress-bar {
+            height: 10px;
+            background: #E0E0E0;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 5px;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--primary-color);
+            width: 75%; /* Example Progress */
+            border-radius: 10px;
+        }
+
+        .continue-btn {
+            background: var(--primary-color);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+
+        /* Upcoming Tasks List */
+        .tasks-section {
+            margin-top: 2rem;
+        }
+
+        .task-list {
+            background: var(--card-bg);
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-sm);
+            padding: 1rem;
+        }
+
+        .task-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .task-item:last-child { border-bottom: none; }
+
+        .task-details { display: flex; align-items: center; gap: 10px; }
+        .task-icon { color: var(--accent-color); font-size: 1.2rem; }
+        .task-title { font-weight: 600; color: var(--text-dark); display: block; }
+        .task-meta { font-size: 0.85rem; color: var(--text-light); }
+        
+        .status-badge {
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        .status-due { background: #FFEBEE; color: #D32F2F; }
+        .status-soon { background: #E3F2FD; color: #1976D2; }
+
+        /* --- 4. Responsive --- */
+        @media (max-width: 850px) {
+            .dashboard-container { grid-template-columns: 1fr; }
+            
+            .sidebar {
+                display: flex;
+                overflow-x: auto;
+                padding: 10px;
+                gap: 10px;
+                white-space: nowrap;
+            }
+            
+            .nav-link { margin-bottom: 0; }
+            
+            .stats-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="HADEER.html" class="logo"><span>🧬</span> Miss Hadeer Academy</a>
+        <div class="user-profile">
+            <span class="user-avatar">🎓</span>
+            <span>Student Panel</span>
+        </div>
+    </header>
+
+    <div class="dashboard-container">
+        
+        <aside class="sidebar">
+            <nav>
+                <a href="#" class="nav-link active"><span>📊</span> Overview</a>
+                <a href="courses.html" class="nav-link"><span>📚</span> My Courses</a>
+                <a href="#" class="nav-link"><span>📝</span> Quizzes</a>
+                <a href="#" class="nav-link"><span>🏆</span> Grades</a>
+                <a href="#" class="nav-link"><span>⚙️</span> Settings</a>
+                <a href="login.html" class="nav-link logout"><span>🚪</span> Logout</a>
+            </nav>
+        </aside>
+
+        <main>
+            <div class="welcome-banner">
+                <h1>Welcome back, Future Biologist! 👋</h1>
+                <p>You have completed 75% of "Human Physiology". Keep up the great work.</p>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-card green">
+                    <span class="stat-icon">✅</span>
+                    <div class="stat-info">
+                        <h3>12</h3>
+                        <p>Lessons Completed</p>
+                    </div>
+                </div>
+                <div class="stat-card purple">
+                    <span class="stat-icon">⏳</span>
+                    <div class="stat-info">
+                        <h3>4.5h</h3>
+                        <p>Hours Studied</p>
+                    </div>
+                </div>
+                <div class="stat-card blue">
+                    <span class="stat-icon">⭐</span>
+                    <div class="stat-info">
+                        <h3>A-</h3>
+                        <p>Average Grade</p>
+                    </div>
+                </div>
+            </div>
+
+            <h3 class="section-header">Continue Learning</h3>
+            <div class="course-card">
+                <div class="course-icon" style="font-size: 2.5rem;">🫀</div>
+                <div class="course-info">
+                    <h4>Human Body Systems</h4>
+                    <span>Chapter 4: The Nervous System</span>
+                </div>
+                <div class="progress-wrapper">
+                    <div class="progress-bar">
+                        <div class="progress-fill"></div>
+                    </div>
+                    <span style="font-size: 0.8rem; color: var(--text-light);">75% Completed</span>
+                </div>
+                <a href="lesson.html" class="continue-btn">Resume Lesson →</a>
+            </div>
+
+            <div class="tasks-section">
+                <h3 class="section-header">Upcoming Tasks</h3>
+                <div class="task-list">
+                    <div class="task-item">
+                        <div class="task-details">
+                            <span class="task-icon">🧪</span>
+                            <div>
+                                <span class="task-title">Genetics Quiz</span>
+                                <span class="task-meta">Due: Oct 25th at 11:59 PM</span>
+                            </div>
+                        </div>
+                        <span class="status-badge status-due">Due Soon</span>
+                    </div>
+
+                    <div class="task-item">
+                        <div class="task-details">
+                            <span class="task-icon">📄</span>
+                            <div>
+                                <span class="task-title">Cell Division Worksheet</span>
+                                <span class="task-meta">Due: Oct 28th</span>
+                            </div>
+                        </div>
+                        <span class="status-badge status-soon">Next Week</span>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+</body>
+</html>

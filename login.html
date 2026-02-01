@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login & Sign Up | Miss Hadeer Academy</title>
+    <style>
+        :root {
+            --primary: #2E7D32; /* أخضر بيولوجي */
+            --accent: #6A1B9A;  /* بنفسجي هادئ */
+            --bg: #F1F8F1;
+            --white: #ffffff;
+            --gray: #f8f9fa;
+        }
+
+        * { 
+            margin: 0; 
+            padding: 0; 
+            box-sizing: border-box; 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+        }
+
+        body { 
+            background: var(--bg); 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            min-height: 100vh; 
+            padding: 20px; 
+        }
+
+        .auth-container {
+            background: var(--white); 
+            width: 100%; 
+            max-width: 450px; 
+            padding: 2.5rem; 
+            border-radius: 20px; 
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+
+        .logo-area { 
+            text-align: center; 
+            margin-bottom: 1.5rem; 
+            font-size: 3rem; 
+            filter: drop-shadow(0 5px 5px rgba(0,0,0,0.1));
+        }
+
+        /* تنسيق التبويبات */
+        .tabs { 
+            display: flex; 
+            margin-bottom: 2rem; 
+            background: var(--gray);
+            padding: 5px;
+            border-radius: 12px;
+        }
+
+        .tab {
+            flex: 1; 
+            text-align: center; 
+            padding: 12px; 
+            cursor: pointer;
+            font-weight: bold; 
+            color: #777; 
+            transition: 0.3s;
+            border-radius: 10px;
+        }
+
+        .tab.active { 
+            background: var(--white);
+            color: var(--primary); 
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+
+        /* تنسيق النماذج */
+        .form-section { display: none; }
+        .form-section.active { 
+            display: block; 
+            animation: fadeIn 0.4s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .input-group { margin-bottom: 1.2rem; }
+
+        label { 
+            display: block; 
+            margin-bottom: 8px; 
+            font-size: 0.85rem; 
+            font-weight: 600; 
+            color: var(--primary);
+        }
+
+        input, select {
+            width: 100%; 
+            padding: 12px 15px; 
+            border: 2px solid #eee; 
+            border-radius: 10px; 
+            outline: none; 
+            transition: 0.3s;
+            font-size: 0.95rem;
+            background: var(--gray);
+        }
+
+        input:focus, select:focus { 
+            border-color: var(--primary); 
+            background: var(--white);
+            box-shadow: 0 0 0 4px rgba(46, 125, 50, 0.1);
+        }
+
+        /* تنسيق خاص لقائمة الجنس */
+        select {
+            appearance: none;
+            cursor: pointer;
+        }
+
+        .btn {
+            width: 100%; 
+            padding: 14px; 
+            background: var(--primary);
+            color: white; 
+            border: none; 
+            border-radius: 50px;
+            font-weight: bold; 
+            font-size: 1rem;
+            cursor: pointer; 
+            transition: 0.3s;
+            margin-top: 10px;
+            box-shadow: 0 5px 15px rgba(46, 125, 50, 0.2);
+        }
+
+        .btn:hover { 
+            background: var(--accent); 
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(106, 27, 154, 0.2);
+        }
+
+        /* روابط إضافية */
+        .footer-links {
+            text-align: center;
+            margin-top: 1.5rem;
+            font-size: 0.85rem;
+        }
+
+        .footer-links a {
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        /* استجابة الشاشات الصغيرة */
+        @media (max-width: 480px) {
+            .auth-container { padding: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="auth-container">
+    <div class="logo-area">🧬</div>
+    
+    <div class="tabs">
+        <div class="tab active" onclick="showForm('login', this)">تسجيل الدخول</div>
+        <div class="tab" onclick="showForm('signup', this)">حساب جديد</div>
+    </div>
+
+    <div id="signup" class="form-section">
+        <form action="dashboard.html">
+            <div class="input-group">
+                <label>الاسم بالكامل</label>
+                <input type="text" placeholder="اسم الطالب" required>
+            </div>
+            <div class="input-group">
+                <label>البريد الإلكتروني</label>
+                <input type="email" placeholder="email@example.com" required>
+            </div>
+            <div style="display: flex; gap: 10px;">
+                <div class="input-group" style="flex: 1;">
+                    <label>كلمة المرور</label>
+                    <input type="password" placeholder="••••••••" required>
+                </div>
+                <div class="input-group" style="flex: 1;">
+                    <label>تأكيد المرور</label>
+                    <input type="password" placeholder="••••••••" required>
+                </div>
+            </div>
+            <div class="input-group">
+                <label>رقم الهاتف</label>
+                <input type="tel" placeholder="012xxxxxxxx" required>
+            </div>
+            <div class="input-group">
+                <label>الجنس</label>
+                <select required>
+                    <option value="" disabled selected>اختر النوع</option>
+                    <option value="male">ذكر</option>
+                    <option value="female">أنثى</option>
+                </select>
+            </div>
+            <button type="submit" class="btn">إنشاء حساب جديد</button>
+        </form>
+    </div>
+
+    <div id="login" class="form-section active">
+        <form action="dashboard.html">
+            <div class="input-group">
+                <label>البريد الإلكتروني</label>
+                <input type="email" placeholder="example@mail.com" required>
+            </div>
+            <div class="input-group">
+                <label>كلمة المرور</label>
+                <input type="password" placeholder="••••••••" required>
+            </div>
+            <button type="submit" class="btn">دخول إلى المنصة</button>
+            <div class="footer-links">
+                <a href="#">نسيت كلمة المرور؟</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    function showForm(formId, tabEl) {
+        // إخفاء النماذج
+        document.querySelectorAll('.form-section').forEach(f => f.classList.remove('active'));
+        // إظهار النموذج المطلوب
+        document.getElementById(formId).classList.add('active');
+        // تحديث التبويبات
+        document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+        tabEl.classList.add('active');
+    }
+    // ابحث عن الفورم داخل كود صفحة اللوجن وعدله ليكون كالتالي
+document.querySelectorAll('form').forEach(form => {
+    form.onsubmit = function(e) {
+        // e.preventDefault(); // نوقف التحميل التلقائي مؤقتاً
+        
+        // نخزن في المتصفح أن المستخدم سجل دخوله
+        localStorage.setItem('isLoggedIn', 'true');
+        
+        // ننتقل للداش بورد
+        window.location.href = 'dashboard.html';
+        return false;
+    };
+});
+</script>
+
+</body>
+</html>

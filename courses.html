@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Courses | Miss Hadeer Academy</title>
+    <style>
+        :root {
+            --primary-color: #2E7D32;
+            --primary-light: #43A047;
+            --accent-color: #6A1B9A;
+            --bg-color: #F1F8F1;
+            --card-bg: #FFFFFF;
+            --text-dark: #2C3E50;
+            --text-light: #546E7A;
+            --white: #FFFFFF;
+            --radius-md: 15px;
+            --shadow: 0 10px 20px rgba(0,0,0,0.05);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+        body { background-color: var(--bg-color); color: var(--text-dark); }
+
+        header {
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+            padding: 1rem 5%;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo { font-weight: bold; font-size: 1.3rem; text-decoration: none; color: white; }
+
+        .container { max-width: 1200px; margin: 3rem auto; padding: 0 2rem; text-align: center; }
+        
+        .header-section { margin-bottom: 3rem; }
+        .header-section h1 { color: var(--primary-color); font-size: 2.5rem; }
+
+        /* Pricing Grid */
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .pricing-card {
+            background: var(--card-bg);
+            padding: 2.5rem 1.5rem;
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow);
+            transition: 0.3s;
+            position: relative;
+            border: 1px solid #e0eec0;
+        }
+
+        .pricing-card:hover { transform: translateY(-10px); box-shadow: 0 15px 30px rgba(46, 125, 50, 0.15); }
+
+        .pricing-card.featured { border: 2px solid var(--accent-color); }
+        .badge {
+            position: absolute; top: -15px; left: 50%; transform: translateX(-50%);
+            background: var(--accent-color); color: white; padding: 5px 15px;
+            border-radius: 20px; font-size: 0.8rem; font-weight: bold;
+        }
+
+        .icon { font-size: 3rem; margin-bottom: 1rem; display: block; }
+        .plan-name { font-size: 1.5rem; color: var(--primary-color); margin-bottom: 1rem; }
+        .price { font-size: 2.5rem; font-weight: 800; margin-bottom: 1.5rem; }
+        .price span { font-size: 1rem; color: var(--text-light); }
+
+        .features { list-style: none; margin-bottom: 2rem; text-align: left; }
+        .features li { margin-bottom: 10px; color: var(--text-light); display: flex; align-items: center; gap: 10px; }
+        .features li::before { content: "✔"; color: var(--primary-color); font-weight: bold; }
+
+        .buy-btn {
+            display: block; width: 100%; padding: 12px;
+            background: var(--primary-color); color: white;
+            text-decoration: none; border-radius: 50px; font-weight: bold; transition: 0.3s;
+        }
+
+        .buy-btn:hover { background: var(--accent-color); }
+    </style>
+</head>
+<body>
+
+<header>
+    <a href="HADEER.html" class="logo">🧬 Miss Hadeer Academy</a>
+    <nav>
+        <a href="HADEER.html" style="color: white; text-decoration: none;">الرئيسية</a>
+    </nav>
+</header>
+
+<div class="container">
+    <div class="header-section">
+        <h1>اختر باقتك التعليمية 🔬</h1>
+        <p>باقات متنوعة تناسب احتياجاتك في مادة الأحياء</p>
+    </div>
+
+    <div class="pricing-grid">
+        <div class="pricing-card">
+            <span class="icon">🦠</span>
+            <h2 class="plan-name">باقة الخلية</h2>
+            <div class="price">150 <span>جنية / شهر</span></div>
+            <ul class="features">
+                <li>شرح جميع دروس الشهر</li>
+                <li>مذكرات PDF ملونة</li>
+                <li>بنك أسئلة بسيط</li>
+            </ul>
+            <a href="#" class="buy-btn">اشترك الآن</a>
+        </div>
+
+        <div class="pricing-card featured">
+            <span class="badge">الأكثر طلباً</span>
+            <span class="icon">🧬</span>
+            <h2 class="plan-name">باقة الـ DNA</h2>
+            <div class="price">250 <span>جنية / شهر</span></div>
+            <ul class="features">
+                <li>كل مميزات باقة الخلية</li>
+                <li>امتحانات أسبوعية شاملة</li>
+                <li>متابعة مباشرة عبر الواتساب</li>
+                <li>فيديوهات مراجعة نهائية</li>
+            </ul>
+            <a href="#" class="buy-btn">اشترك الآن</a>
+        </div>
+
+        <div class="pricing-card">
+            <span class="icon">🌍</span>
+            <h2 class="plan-name">باقة النظام المتكامل</h2>
+            <div class="price">600 <span>جنية / ترم</span></div>
+            <ul class="features">
+                <li>اشتراك الترم بالكامل</li>
+                <li>مراجعات ليلة الامتحان</li>
+                <li>خصم 20% على المراجعات</li>
+                <li>تواصل خاص مع مس هدير</li>
+            </ul>
+            <a href="#" class="buy-btn">اشترك الآن</a>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
